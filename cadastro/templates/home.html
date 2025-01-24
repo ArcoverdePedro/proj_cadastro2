@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Página Inicial
+{% endblock %}
+
+{% block content %}
+{% load static %}
+<!--formulário da validação do cpf-->
+<div class="container">
+    <h1>Pessoas cadastradas:</h1>
+    <a href="{% url 'cadastro' %}" class="btn btn-primary">Cadastrar nova pessoa</a>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Nome</th>
+                <th>Email</th>
+                <th>CPF</th>
+                <th>CEP</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for pessoa in pessoas %}
+            <tr>
+                <td>{{ pessoa.nome }}</td>
+                <td>{{ pessoa.email }}</td>
+                <td>{{ pessoa.cpf }}</td>
+                <td>{{ pessoa.cep }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>        
+
+
+</body>
+</html>
+
+{% endblock %}

@@ -1,0 +1,151 @@
+{%extends 'base.html'%}
+{% block title %}tela de cadastro{% endblock %}
+
+{% block content %}
+{% load static %}
+<div class="container">
+    <form id="cadastroForm">
+        <label for="nome" class="form-label" style="font-size: 25px;">Nome:</label>
+        <br>
+        <input type="text" class="form-control, font-size= 200px;" id="nome" name="nome" required>
+        <br>
+        <label for="email" class="form-label" style="font-size: 25px;">Email:</label>
+        <br>
+        <input type="email" class="form-control, font-size= 200px;" id="email" name="email" required>
+        <div id="mensagememail"></div>
+        <br>
+        <label for="cpf" class="form-label" style="font-size: 25px;">CPF:</label>
+        <br>
+        <input type="text" class="form-control, font-size= 200px;" id="cpf" name="cpf" maxlength="15" required>
+        <div id="mensagemcpf"></div>
+        <br>
+        <label for="cep" class="form-label" style="font-size: 25px;">CEP:</label>
+        <br>
+        <input type="text" class="form-control, font-size= 200px;" id="cep" name="cep" maxlength="10" required>
+        <div id="mensagemcep"></div>
+        <br>
+        <button type="submit" class="btn btn-primary btn-cadastro">Enviar</button>
+
+    </form>
+    <div id="mensagemcadastro"></div>
+</div>
+<script>
+    $(document).ready(function() {
+        $('#cpf').blur(function() {
+            var cpf = $('#cpf').val();
+            if(cpf !== ''){
+                $.ajax({
+                    url: '/validarcpf/',
+                    type: 'POST',
+                    data: {
+                        cpf: cpf
+                    },
+                    success: function(responsecpf) {
+                        const messagecpf = $('#mensagemcpf');
+                        if(responsecpf.status === 'ok'){
+                            messagecpf.css('color', 'green').text('CPF válido!').show();
+                        } else {
+                            messagecpf.css('color', 'red').text('CPF inválido!').show();
+                        }
+                        setTimeout(function() {
+                            messagecpf.hide();
+                        }, 1500);
+                    },
+                    error: function() {
+                        const messagecpf = $('#mensagemcpf');
+                        messagecpf.css('color', 'red').text('Erro ao validar CPF. Tente novamente.');
+                    }
+                });
+            };
+        });
+        $('#cep').blur(function() {
+            var cep = $('#cep').val();
+            if(cep !== ''){
+                $.ajax({
+                    url: '/buscarcep/',
+                    type: 'POST',
+                    data: {
+                        cep: cep
+                    },
+                    success: function(responsecep) {
+                        const messagecep = $('#mensagemcep');
+                        if(responsecep.erro === 'true'){
+                            messagecep.css('color', 'Red').text('CEP Inexistente!').show();
+                        } else {
+                            messagecep.css('color', 'green').text('Seu cep e logradouro: ' + responsecep.cep + " " + responsecep.logradouro).show();
+                        }
+                        setTimeout(function() {
+                            messagecep.hide();
+                        }, 3000);
+                    },
+                    error: function() {
+                        const messagecep = $('#mensagemcep');
+                        messagecep.css('color', 'red').text('Erro ao buscar CEP. Tente novamente.');
+                    }
+                });
+            };
+        });
+        $('#email').blur(function() {
+            var email = $('#email').val();
+            if(email !== ''){
+                $.ajax({
+                    url: '/validaremail/',
+                    type: 'POST',
+                    data: {
+                        email: email
+                    },
+                    success: function(responseemail) {
+                        const messageemail = $('#mensagememail');
+                        if(responseemail.status === 'ok'){
+                            messageemail.css('color', 'green').text('Email válido!').show();
+                        } else {
+                            messageemail.css('color', 'red').text('Email inválido!').show();
+                        }
+                        setTimeout(function() {
+                            messageemail.hide();
+                        }, 1500);
+                    },
+                    error: function() {
+                        const messageemail = $('#mensagememail');
+                        messageemail.css('color', 'red').text('Erro ao validar Email. Tente novamente.');
+                    }
+                });
+            };
+        });
+
+    })
+    $('#cadastroForm').submit(function(event) {
+        event.preventDefault();
+        var nome = $('#nome').val();
+        var email = $('#email').val();
+        var cpf = $('#cpf').val();
+        var cep = $('#cep').val();
+        $.ajax({
+            url: '/cadastrar/',
+            type: 'POST',
+            data: {
+                nome: nome,
+                email: email,
+                cpf: cpf,
+                cep: cep
+            },
+            success: function(response) {
+                const messagecadastro = $('#mensagemcadastro');
+                if(response.status === 'ok'){
+                    messagecadastro.css('color', 'green').text('Cadastro realizado com sucesso!').show();
+                } else {
+                    messagecadastro.css('color', 'red').text('Erro ao cadastrar!').show();
+                }
+                setTimeout(function() {
+                    messagecadastro.hide();
+                }, 1500);
+            },
+            error: function() {
+                const messagecadastro = $('#mensagemcadastro');
+                messagecadastro.css('color', 'red').text('Erro ao cadastrar. Tente novamente.');
+            }
+        });
+    });
+      
+</script>
+{% endblock %}
