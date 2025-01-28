@@ -24,7 +24,12 @@
         <input type="text" class="form-control, font-size= 200px;" id="cep" name="cep" maxlength="10" required>
         <div id="mensagemcep"></div>
         <br>
+        <label for="Telefone" class="form-label" style="font-size: 25px;">Telefone:</label>
+        <br>
+        <input type="text" class="form-control, font-size= 200px;" id="Telefone" name="Telefone" required>
+        <br>
         <button type="submit" class="btn btn-primary btn-cadastro">Enviar</button>
+        
 
     </form>
     <div id="mensagemcadastro"></div>
@@ -127,7 +132,8 @@
                 nome: nome,
                 email: email,
                 cpf: cpf,
-                cep: cep
+                cep: cep,
+                Telefone: Telefone
             },
             success: function(response) {
                 const messagecadastro = $('#mensagemcadastro');

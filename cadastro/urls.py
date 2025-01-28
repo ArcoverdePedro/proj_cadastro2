@@ -8,5 +8,6 @@ urlpatterns = [
     path('validaremail/', views.validaremail, name='validaremail'),
     path('cadastro/', views.cadastro, name='cadastro'),
     path('cadastrar/', views.cadastrar, name='cadastrar'),
+    path('dentro/', views.dentro, name='dentro'),
     
     ]

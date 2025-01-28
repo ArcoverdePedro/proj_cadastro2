@@ -51,9 +51,23 @@ def cadastro(request):
 
 @csrf_exempt
 def cadastrar(request):
-    nome = request.POST.get('nome')
-    cpf = request.POST.get('cpf')
-    cep = request.POST.get('cep')
-    cidade = request.POST.get('cidade')
-    estado = request.POST.get('estado')
-    email = request.POST.get('email')
+    if request.method == 'POST':
+        nome = request.POST.get('nome')
+        cpf = request.POST.get('cpf')
+        email = request.POST.get('email')
+        cep = request.POST.get('cep')
+        Telefone = request.POST.get('Telefone')
+        pessoa = Pessoa(
+            nome=nome,
+            cpf=cpf,
+            email=email,
+            cep=cep, 
+            Telefone=Telefone,
+            )
+        #pessoa.save()
+        return render(request, 'dentro.html')
+    
+@csrf_exempt
+def dentro(request):
+
+    return render(request, 'dentro.html')
