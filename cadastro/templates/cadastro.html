@@ -36,89 +36,6 @@
 </div>
 <script>
     $(document).ready(function() {
-        $('#cpf').blur(function() {
-            var cpf = $('#cpf').val();
-            if(cpf !== ''){
-                $.ajax({
-                    url: '/validarcpf/',
-                    type: 'POST',
-                    data: {
-                        cpf: cpf
-                    },
-                    success: function(responsecpf) {
-                        const messagecpf = $('#mensagemcpf');
-                        if(responsecpf.status === 'ok'){
-                            messagecpf.css('color', 'green').text('CPF válido!').show();
-                        } else {
-                            messagecpf.css('color', 'red').text('CPF inválido!').show();
-                        }
-                        setTimeout(function() {
-                            messagecpf.hide();
-                        }, 1500);
-                    },
-                    error: function() {
-                        const messagecpf = $('#mensagemcpf');
-                        messagecpf.css('color', 'red').text('Erro ao validar CPF. Tente novamente.');
-                    }
-                });
-            };
-        });
-        $('#cep').blur(function() {
-            var cep = $('#cep').val();
-            if(cep !== ''){
-                $.ajax({
-                    url: '/buscarcep/',
-                    type: 'POST',
-                    data: {
-                        cep: cep
-                    },
-                    success: function(responsecep) {
-                        const messagecep = $('#mensagemcep');
-                        if(responsecep.erro === 'true'){
-                            messagecep.css('color', 'Red').text('CEP Inexistente!').show();
-                        } else {
-                            messagecep.css('color', 'green').text('Seu cep e logradouro: ' + responsecep.cep + " " + responsecep.logradouro).show();
-                        }
-                        setTimeout(function() {
-                            messagecep.hide();
-                        }, 3000);
-                    },
-                    error: function() {
-                        const messagecep = $('#mensagemcep');
-                        messagecep.css('color', 'red').text('Erro ao buscar CEP. Tente novamente.');
-                    }
-                });
-            };
-        });
-        $('#email').blur(function() {
-            var email = $('#email').val();
-            if(email !== ''){
-                $.ajax({
-                    url: '/validaremail/',
-                    type: 'POST',
-                    data: {
-                        email: email
-                    },
-                    success: function(responseemail) {
-                        const messageemail = $('#mensagememail');
-                        if(responseemail.status === 'ok'){
-                            messageemail.css('color', 'green').text('Email válido!').show();
-                        } else {
-                            messageemail.css('color', 'red').text('Email inválido!').show();
-                        }
-                        setTimeout(function() {
-                            messageemail.hide();
-                        }, 1500);
-                    },
-                    error: function() {
-                        const messageemail = $('#mensagememail');
-                        messageemail.css('color', 'red').text('Erro ao validar Email. Tente novamente.');
-                    }
-                });
-            };
-        });
-
-    })
     $('#cadastroForm').submit(function(event) {
         event.preventDefault();
         var nome = $('#nome').val();
@@ -152,6 +69,7 @@
             }
         });
     });
+});
       
 </script>
 {% endblock %}

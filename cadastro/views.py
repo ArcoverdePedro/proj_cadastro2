@@ -1,9 +1,9 @@
-from django.shortcuts import render
+from django.shortcuts import render,redirect, get_object_or_404
 from django.http import JsonResponse
 from .utils import validador
 from .models import Pessoa
-from django.views.decorators.csrf import csrf_exempt
 import requests
+from django.views.decorators.csrf import csrf_exempt
 from django.core.validators import EmailValidator
 
 # Create your views here.
@@ -11,39 +11,8 @@ from django.core.validators import EmailValidator
 
 @csrf_exempt
 def home(request):
-    return render(request, 'home.html')
-
-@csrf_exempt
-def validarcpf(request):
-    cpf = request.POST.get('cpf')
-    if validador(cpf):
-        return JsonResponse({'status': "ok"})
-    else:
-        return JsonResponse({'status': "erro"})
-
-@csrf_exempt
-def validaremail(request):
-    email = request.POST.get('email')
-    validator = EmailValidator()
-    try:
-        validator(email)
-        return JsonResponse({'status': "ok"})
-    except:
-        return JsonResponse({'status': "erro"})
-    
-@csrf_exempt
-def buscarcep(request):
-    if request.method == 'POST':
-        cep_number = request.POST.get('cep')
-        #tenta puxar o cep da api do viacep
-        try :
-            #faz a requisição e pega o json colocando na variavel data
-            response = requests.get(f'https://viacep.com.br/ws/{cep_number}/json/') 
-            data = response.json()
-            return JsonResponse(data)
-        except:
-            #se der erro na requisição, retorna erro = true (aplicando a mesma lógica da api do viacep)
-            return JsonResponse({'erro': 'true'})
+    pessoas = Pessoa.objects.all()
+    return render(request, 'home.html', {'pessoas':pessoas})
 
 @csrf_exempt 
 def cadastro(request):
@@ -53,21 +22,50 @@ def cadastro(request):
 def cadastrar(request):
     if request.method == 'POST':
         nome = request.POST.get('nome')
+
         cpf = request.POST.get('cpf')
+        if not validador(cpf):
+            response = JsonResponse({'erro': "cpf"})
+            return response
+        
         email = request.POST.get('email')
+        try:
+            validaremail = EmailValidator()
+            validaremail(email)            
+        except:
+            return JsonResponse({'erro': "email"})
+        
         cep = request.POST.get('cep')
-        Telefone = request.POST.get('Telefone')
+        cep = cep.replace('-', '')
+        if len(cep) == 8:
+            try:
+                int(cep)
+                response = requests.get(f'https://viacep.com.br/ws/{cep}/json/').json()
+                if "erro" in response:
+                    return JsonResponse({'erro': "cep"})
+            except:
+                return response
+        elif len(cep) != 8:
+            response = JsonResponse({'erro': "cep"})
+            return response
+        
+        telefone = request.POST.get('telefone')
+
         pessoa = Pessoa(
             nome=nome,
             cpf=cpf,
             email=email,
             cep=cep, 
-            Telefone=Telefone,
+            telefone=telefone,
             )
-        #pessoa.save()
-        return render(request, 'dentro.html')
-    
-@csrf_exempt
-def dentro(request):
+        pessoa.save()
+        return redirect('home')
 
-    return render(request, 'dentro.html')
+@csrf_exempt
+def excluir(request, id):
+    if request.method == 'POST':
+        pessoa = get_object_or_404(Pessoa, id = id)
+        pessoa.delete()
+        return redirect('home')
+
+

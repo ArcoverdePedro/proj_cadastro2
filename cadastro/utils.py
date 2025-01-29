@@ -21,3 +21,4 @@ def validador(cpf):
                 return False
     else:
         return False
+    
