@@ -8,25 +8,28 @@ Página Inicial
 {% load static %}
 <!--formulário da validação do cpf-->
 <div class="container">
+    <div class="flex items-center justify-center">
     <h1>Cadastro  de pessoas</h1>
+    </div>
     
 
 <!-- Modal toggle -->
-<button data-modal-target="crud-modal" data-modal-toggle="crud-modal" class="block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" type="button">
+ <div class="flex items-center justify-center">
+<button data-modal-target="modal-cadastro" data-modal-toggle="modal-cadastro" class=" block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" type="button">
     cadastrar
   </button>
-  
+</div>
   <!-- Main modal -->
-  <div id="crud-modal" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
+  <div id="modal-cadastro" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
       <div class="relative p-4 w-full max-w-md max-h-full">
           <!-- Modal content -->
           <div class="relative bg-white rounded-lg shadow-sm dark:bg-gray-700">
               <!-- Modal header -->
               <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600 border-gray-200">
                   <h3 class="text-lg font-semibold text-gray-900 dark:text-white">
-                      cadastrar
+                      Cadastrar
                   </h3>
-                  <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-toggle="crud-modal">
+                  <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-toggle="modal-cadastro">
                       <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
                           <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
                       </svg>
@@ -41,19 +44,19 @@ Página Inicial
                           <input type="text" name="nome" id="nome" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Nome" required="">
                       </div>
                       <div class="col-span-2">
-                        <label for="cpf" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">cpf</label>
+                        <label for="cpf" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">CPF</label>
                         <input type="text" name="cpf" id="cpf" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="CPF" required="">
                     </div>
                     <div class="col-span-2">
-                        <label for="cep" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">cep</label>
+                        <label for="cep" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">CEP</label>
                         <input type="text" name="cep" id="cep" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="CEP" required="">
                     </div>
                     <div class="col-span-2">
-                        <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">email</label>
+                        <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">EMAIL</label>
                         <input type="text" name="email" id="email" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Email" required="">
                     </div>
                     <div class="col-span-2">
-                        <label for="telefone" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">telefone</label>
+                        <label for="telefone" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">TELEFONE</label>
                         <input type="text" name="telefone" id="telefone" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="telefone" required="">
                     </div>
                   </div>
@@ -88,18 +91,82 @@ Página Inicial
                 <td>{{ pessoa.cep }}</td>
                 <td>{{ pessoa.telefone }}</td>
                 <td>
-                <form action="{% url 'excluir' pessoa.id %}" method="POST" class="inline">
+                <form action="{% url 'excluir' pessoa.id %}" method="POST" class="display:inline;">
+                    {%csrf_token%}
                     <button type="submit" 
                             class="text-white bg-gradient-to-r from-red-400 via-red-500 to-red-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2">
                         Excluir
                     </button>
+                    <input type="hidden" name="id" value="{{pessoa.id}}">
+                </td>
+
+                <td>
+                <!-- Modal toggle -->
+                <button data-modal-target="modal-editar" data-modal-toggle="modal-editar" class="text-white bg-gradient-to-r from-green-400 via-green-500 to-green-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-green-300 dark:focus:ring-green-800 shadow-lg shadow-green-500/50 dark:shadow-lg dark:shadow-green-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2" type="button">
+                    Editar
+                </button>
+                
+                <!-- Main modal -->
+                <div id="modal-editar" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
+                    <div class="relative p-4 w-full max-w-md max-h-full">
+                        <!-- Modal content -->
+                        <div class="relative bg-white rounded-lg shadow-sm dark:bg-gray-700">
+                            <!-- Modal header -->
+                            <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600 border-gray-200">
+                                <h3 class="text-lg font-semibold text-gray-900 dark:text-white">
+                                    Editar
+                                </h3>
+                                <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-toggle="modal-editar">
+                                    <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
+                                    </svg>
+                                    <span class="sr-only">Close modal</span>
+                                </button>
+                            </div>
+                            <!-- Modal body -->
+                            <form id="editarForm"class="p-4 md:p-5">
+                                <div class="grid gap-4 mb-4 grid-cols-2">
+                                    <div class="col-span-2">
+                                        <label for="nome" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nome</label>
+                                        <input type="text" name="nome" id="nome" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Nome" required="">
+                                    </div>
+                                    <div class="col-span-2">
+                                      <label for="cpf" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">CPF</label>
+                                      <input type="text" name="cpf" id="cpf" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="CPF" required="">
+                                  </div>
+                                  <div class="col-span-2">
+                                      <label for="cep" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">CEP</label>
+                                      <input type="text" name="cep" id="cep" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="CEP" required="">
+                                  </div>
+                                  <div class="col-span-2">
+                                      <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">EMAIL</label>
+                                      <input type="text" name="email" id="email" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Email" required="">
+                                  </div>
+                                  <div class="col-span-2">
+                                      <label for="telefone" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">TELEFONE</label>
+                                      <input type="text" name="telefone" id="telefone" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="telefone" required="">
+                                  </div>
+                                </div>
+                                <button type="submit" class="text-white inline-flex items-center bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                                    <svg class="me-1 -ms-1 w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z" clip-rule="evenodd"></path></svg>
+                                    editar
+                                </button>
+                                <br>
+                                <div id="mensagemeditar"></div>
+              
+                            </form>
+                        </div>
+                    </div>
+                </div> 
+  
                 </td>
             </tr>
             {% empty %}
             <tr>
-                <td colspan="5">Nenhuma pessoa cadastrada.</td>
+                <td colspan="5">Nenhuma pessoa cadastrada</td>
             </tr>
             {% endfor %}
+        
         </tbody> 
     </table>       
 </div>
@@ -137,9 +204,6 @@ Página Inicial
                     else if(response.erro === 'cep'){
                         messagecadastro.css('color', 'red').text('CEP inválido!').show();
                     }
-                    else {
-                        messagecadastro.css('color', 'green').text('cadastrado!').show();
-                    }
                     setTimeout(function() {
                         messagecadastro.hide();
                     }, 1500);
@@ -147,6 +211,47 @@ Página Inicial
                 error: function() {
                     const messagecadastro = $('#mensagemcadastro');
                     messagecadastro.css('color', 'red').text('Erro ao cadastrar. Tente novamente.');
+                }
+            });
+        });
+        $('#editarForm').submit(function(event) {
+            event.preventDefault();
+            var nome = $('#nome').val();
+            var email = $('#email').val();
+            var cpf = $('#cpf').val();
+            var cep = $('#cep').val();
+            var telefone = $('#telefone').val();
+            $.ajax({
+                url: '/editar/',
+                type: 'POST',
+                data: {
+                    nome: nome,
+                    email: email,
+                    cpf: cpf,
+                    cep: cep,
+                    telefone: telefone,
+                },
+                success: function(response) {
+                    const mensagemeditar = $('#mensagemeditar');
+                    if(response.erro === 'email'){
+                        mensagemeditar.css('color', 'red').text('Email inválido!').show();
+                    }
+                    else if(response.erro === 'cpf'){
+                        mensagemeditar.css('color', 'red').text('CPF inválido!').show();
+                    }
+                    else if(response.erro === 'cep'){
+                        mensagemeditar.css('color', 'red').text('CEP inválido!').show();
+                    }
+                    else {
+                        mensagemeditar.css('color', 'green').text('Editado!').show();
+                    }
+                    setTimeout(function() {
+                        mensagemeditar.hide();
+                    }, 1500);
+                },
+                error: function() {
+                    const mensagemeditar = $('#mensagemeditar');
+                    mensagemeditar.css('color', 'red').text('Erro ao cadastrar. Tente novamente.');
                 }
             });
         });

@@ -6,4 +6,6 @@ urlpatterns = [
     path('cadastro/', views.cadastro, name='cadastro'),
     path('cadastrar/', views.cadastrar, name='cadastrar'),   
     path('excluir/<int:id>/', views.excluir, name='excluir'),
+    path('editar/<int:id>/', views.editar, name='editar'),
+    
     ]
