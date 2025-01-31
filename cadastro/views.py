@@ -73,46 +73,40 @@ def excluir(request, id):
 
 @csrf_exempt
 def editar(request, id):
-    pessoa_cadastrada = Pessoa.objects.get(id=id) 
-
     if request.method == 'POST':
-        nome = request.POST.get('nome')
-        cpf = request.POST.get('cpf')
+        pessoa_cadastrada = get_object_or_404(Pessoa, id = request.POST.get('id'))
+        pessoa_cadastrada.nome = request.POST.get('nome')
 
-        if not validador(cpf):
-            return JsonResponse({'erro': "cpf"})
-
-        email = request.POST.get('email')
+        pessoa_cadastrada.cpf = request.POST.get('cpf')
+        if not validador(pessoa_cadastrada.cpf):
+            response = JsonResponse({'erro': "cpf"})
+            return response
+        
+        pessoa_cadastrada.email = request.POST.get('email')
         try:
             validaremail = EmailValidator()
-            validaremail(email)            
+            validaremail(pessoa_cadastrada.email)            
         except:
-            return JsonResponse({'erro': "email"}) # Retorna JsonResponse em caso de erro
+            return JsonResponse({'erro': "email"})
         
-        cep = request.POST.get('cep')
+        pessoa_cadastrada.cep = request.POST.get('cep')
         cep = cep.replace('-', '')
         if len(cep) == 8:
             try:
                 int(cep)
-                response = requests.get(f'https://viacep.com.br/ws/{cep}/json/').json()
-                if "erro" in response:
-                    return JsonResponse({'erro': "cep"}) # Retorna JsonResponse em caso de erro
-            except:
-                return JsonResponse({'erro': "cep"}) # Retorna JsonResponse em caso de erro
+                response = requests.get(f'https://viacep.com.br/ws/{cep}/json/')
+                response.raise_for_status()
+                data = response.json()
+                if "erro" in data:
+                    return JsonResponse({'erro': "cep"})
+            except requests.exceptions.RequestException:
+                return JsonResponse({'erro': "cep"})
         elif len(cep) != 8:
-            return JsonResponse({'erro': "cep"}) # Retorna JsonResponse em caso de erro
-        
-        telefone = request.POST.get('telefone')
-        
+            response = JsonResponse({'erro': "cep"})
+            return response
 
-        pessoa_cadastrada.nome = nome
-        pessoa_cadastrada.cpf = cpf
-        pessoa_cadastrada.cep = cep
-        pessoa_cadastrada.email = email
-        pessoa_cadastrada.telefone = telefone
-        pessoa_cadastrada.save()
+        pessoa_cadastrada.telefone = request.POST.get('telefone')
         
-
-        return redirect('home') 
+        pessoa_cadastrada.save() 
     
     return render(request, 'home.html')
